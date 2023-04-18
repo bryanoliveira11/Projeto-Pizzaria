@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} Pedido |{% endblock title %}
+{% load filters %}
+{% load static %}
+{% block conteudo %}
+
+  {% include "parciais/_pedido.html" %}
+
+  <div class="row">
+    <div class="col d-flex align-content-center justify-content-center">
+        <a class="btn btn-block bg-warning btn-lg mr-3" href="#" style="max-width: 66rem;">
+            Pagar
+        </a>
+    </div>
+</div>
+
+
+{% endblock conteudo %}

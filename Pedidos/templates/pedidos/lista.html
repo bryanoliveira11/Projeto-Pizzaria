@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Meus Pedidos | {% endblock title %}
+{% load filters %}
+{% block conteudo %}
+
+<div class="row">
+    <div class="col">
+        <h3 class="mb-4"> Meus Pedidos </h3>
+        <div class="table-responsive text-center" style="background-color:#fff; border: 1px solid #0000003d; border-radius: 10px;">
+            <table class="table table-striped">
+                <tr>
+                    <th scope="col">Pedido</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Quantidade de Itens</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Mais detalhes</th>
+                </tr>
+                {% for pedido in pedido  %}
+                <tr>
+                    <th scope="row">Pedido N. {{ pedido }}</td>
+                    <td> {{ pedido.total|formata_preco }} </td>
+                    <td> {{ pedido.qtd_total|formata_unidades }} </td>
+                    <td> {{ pedido.get_status_display }} </td>
+                    <td>
+                        <a href="{% url 'pedido:detalhes' pedido.pk %}" class="text-warning">
+                            Ver <i class="fas fa-search-plus ml-2"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mt-3"> 
+    {% include "parciais/_pagination.html" %}
+</div>
+
+{% endblock conteudo %}

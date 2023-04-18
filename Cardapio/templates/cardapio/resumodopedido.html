@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% load static %}
+{% block title %} Finalizar Compra | {% endblock title %} 
+
+{% block conteudo %}
+
+{% if request.session.carrinho %}
+
+  <main class="container mt-4 mb-4">
+
+  <h2>Resumo da Compra</h2>
+  <div class="row mb-5 ml-1">
+      <div id="compra_resumo_card" class="col-lg mt-2">
+
+          <p class="lead mt-4"> Dados de Usuário : </p>
+
+          <p>Caso Precise Editar Algo, 
+            <a class="text-warning" href="{% url 'cliente:cadastro' %}" style="text-decoration: underline; font-size: 18px;"> clique aqui </a> 
+          </p>
+
+          <dl class="row">
+              <dt class="col-lg-2">Nome:</dt>
+              <dd class="col-lg-4">{{ request.user.first_name }}</dd>
+
+              <dt class="col-lg-2">Sobrenome:</dt>
+              <dd class="col-lg-4">{{ request.user.last_name }}</dd>
+
+              <dt class="col-lg-2">Idade:</dt>
+              <dd class="col-lg-4"> {{ usuario.cliente.idade }} Anos </dd>
+
+              <dt class="col-lg-2">CPF:</dt>
+              <dd class="col-lg-4"> {{ usuario.cliente.cpf }} </dd>
+
+              <dt class="col-lg-2">E-mail:</dt>
+              <dd class="col-lg-4"> {{ request.user.email }} </dd>
+          </dl>
+
+          <p class="lead mt-4">Dados de Endereço : </p>
+
+          <p>Caso Precise Editar Algo, 
+            <a class="text-warning" href="{% url 'cliente:cadastro' %}" style="text-decoration: underline; font-size: 18px;"> clique aqui </a> 
+          </p>
+
+          <dl class="row">
+              <dt class="col-lg-2">Endereço:</dt>
+              <dd class="col-lg-4"> {{ usuario.cliente.endereco }} </dd>
+
+              <dt class="col-lg-2">Número:</dt>
+              <dd class="col-lg-4"> {{ usuario.cliente.numero }} </dd>
+
+              <dt class="col-lg-2">Bairro:</dt>
+              <dd class="col-lg-4"> {{ usuario.cliente.bairro }} </dd>
+
+              <dt class="col-lg-2">Cidade:</dt>
+              <dd class="col-lg-4"> {{ usuario.cliente.cidade }} </dd>
+
+              <dt class="col-lg-2">Estado:</dt>
+              <dd class="col-lg-4"> {{ usuario.cliente.estado }} </dd>
+
+              <dt class="col-lg-2">CEP:</dt>
+              <dd class="col-lg-4"> {{ usuario.cliente.cep }} </dd>
+
+          </dl>
+      </div>
+  </div>
+
+  {% include 'parciais/_carrinho.html' %}
+
+    <div class="row">
+      <div class="col">
+          <a class="btn btn-block bg-warning btn-lg" href="{% url 'pedido:salvarpedido' %}" style="max-width: 67rem; margin-left: 3px;">
+              Efetuar Pedido e Pagar
+          </a>
+      </div>
+  </div>
+
+  </div>
+  
+          </div>
+      </div>
+  </div>
+
+</main>
+
+{% else %}
+
+<div class="row mt-5 text-center">
+  <div class="col">
+  <img class="mr-4 mt-5" src="{% static 'imgs/empty-cart.png'%}" alt="img_erro" style="width: 15rem;"/>
+    <h3 class="font-weight-bold">Carrinho Vazio</h3>
+    <p class="lead font-weight-light">Não Há Produtos no seu Carrinho.</p>
+    <a class="text-warning mt-2" href="{% url 'cardapio:pizzas' %}" style="text-decoration: underline; font-size: 20px;"> Ver Cardápio </a> 
+  </div>
+</div>
+
+{% endif %}
+  
+
+{% endblock conteudo %}

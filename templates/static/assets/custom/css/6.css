@@ -1,0 +1,46 @@
+body {
+  background-color: #eee;
+}
+
+#nav_cardapio:hover {
+  color: #ffc107;
+}
+
+#carrinho_count {
+  color: #ffc107;
+}
+
+#carrinho,
+#nav_icon {
+  color: #eee;
+  transition: 0.3;
+  margin-right: 3px;
+}
+
+#carrinho:hover,
+#nav_icon:hover {
+  color: #ffc107;
+}
+
+#erro_results_msg {
+  margin-top: 1.5rem;
+  color: #2c2c2c;
+  font-size: 30px;
+  margin-top: 10rem;
+}
+
+.cart-img {
+  max-width: 150px;
+}
+
+#compra_resumo_card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 7px;
+  border: 1px solid #cccccc94;
+  max-width: 68rem;
+}
+
+.lead{
+    font-weight:500;
+}

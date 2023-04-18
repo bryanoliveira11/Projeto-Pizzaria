@@ -1,0 +1,79 @@
+{% load filters %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+
+    {% if not request.user.is_authenticated %}
+    <a class="navbar-brand" href="{% url 'cardapio:pizzas' %}"> Pizzaria </a>
+    {% else %}
+    <a class="navbar-brand" href="{% url 'cardapio:pizzas' %}"> Bem-Vindo a Pizzaria, {{ user }} ! </a>
+    {% endif %}
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link mr-2" id='nav_cardapio' href="{% url 'cardapio:pizzas' %}"> 
+            <span id="nav_icon">
+              <i class="fa-solid fa-book-open"></i>
+              Cardápio
+            </span>
+           <span class="sr-only">(current)</span></a>
+        </li>
+
+        {% if request.user.is_authenticated %}
+
+        <li class="nav-item active">
+          <a class="nav-link mr-2" id='nav_cardapio' href="{% url 'pedido:listapedido' %}"> 
+            <span id="nav_icon">
+              <i class="fa-solid fa-bell-concierge"></i>
+              Meus Pedidos
+            </span>
+           <span class="sr-only">(current)</span></a>
+          </a>
+
+        {% endif %}
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span id="nav_icon">
+              <i class="fa-solid fa-user"></i>
+              Conta
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            {% if not request.user.is_authenticated %}
+            <a class="dropdown-item" href="{% url 'cliente:cadastro' %}"> Criar Conta </a>
+            <a class="dropdown-item" href="{% url 'cliente:login' %}"> Login </a>
+            {% else %}
+            <a class="dropdown-item" href="{% url 'cliente:cadastro' %}"> Minha Conta </a>
+            <a class="dropdown-item" href="{% url 'cliente:logout' %}"> Logout </a>
+            {% endif %}
+        </li>
+      </ul>
+
+      {% if request.session.carrinho %}
+
+      <li class="nav-item">
+        <a class="nav-link nav-cart-link active" href="{% url 'cardapio:carrinho' %}">
+          <span class="nav-cart-count" id="carrinho_count">
+            <strong> x{{ request.session.carrinho|cart_quantidade_total }} </strong>
+          </span>
+          <span class="nav-cart-icon mr-2" id="carrinho">
+            <i class="fas fa-shopping-cart"></i>
+          </span>
+        </a>
+      </li>
+    </ul>
+
+      {% endif %}
+
+      <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'cardapio:pesquisa' %}">
+        <input name='pesquisa' value="{{ request.GET.pesquisa }}" class="form-control mr-sm-2" type="search" placeholder=" Pesquisar Pizza " aria-label="Pesquisa">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"> Pesquisar </button>
+      </form>
+    </div>
+  </nav>

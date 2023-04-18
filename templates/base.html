@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% include "parciais/_head.html" %}
+    <title> {% block title %} {% endblock title %} Pizzaria </title>
+
+</head>
+
+<body>
+
+ {% include "parciais/_nav.html" %}   
+    
+ <main class='container mt-4 mb-4'> 
+
+    {% include "parciais/_messages.html" %}
+    {% block conteudo %}{% endblock conteudo %}
+
+ </main>
+
+
+<script src="{% static 'assets/bootstrap/js/jquery-3.2.1.slim.min.js' %}"></script>
+<script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/bootstrap/js/popper.min.js' %}"></script>
+<script src="https://kit.fontawesome.com/03bda43025.js" crossorigin="anonymous"></script>
+<script defer src="{% static 'assets/font-awesome/js/all.js' %}"></script>
+<script src="{% static 'assets/custom/js/scripts.js'%}"></script>
+
+</body>
+</html>

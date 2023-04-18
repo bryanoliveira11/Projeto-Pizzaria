@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load filters %}
+{% block title %} {{ pizza.nome|title }} | {% endblock title %}
+{% block conteudo %}
+
+<div class="card" style="height:fit-content; margin-top: 8.5rem; max-width: fit-content";>
+    <div class="row g-0">
+      <div class="col-md-4 d-flex text-center">
+        <img src="{{ pizza.imagem.url }}" class="img-fluid rounded-start" alt="{{ pizza.nome }}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body text-center">
+          <h1 class="card-title text-center text-capitalize font-weight-bold"> {{ pizza.nome }} </h1>
+          <p class="card-text mt-4 text-capitalize" style='font-size:larger;'> &#x25CF {{ pizza.descricao }} </p>
+
+          <form action="{% url 'cardapio:adicionaraocarrinho' %}" id="form-add-to-cart">
+            <div class="form-group">
+                <select id="select-variacoes" name="tid" class="form-control form-control-lg mt-4">
+
+                  {% for tamanhos in pizza.pizzatamanhos_set.all  %}
+                  
+                    <option data-preco="{{ tamanhos.preco|formata_preco }}" value="{{ tamanhos.id }}"> {{ tamanhos.tamanho|title }} </option>
+
+                  {% endfor %}
+
+                </select>
+            </div>
+
+              <div>
+                <span id="variation-preco" style='font-weight:600; font-size:30px;'>
+                  {{ pizza.preco|formata_preco }}
+              </span>
+                <button type="submit" class="btn bg-warning btn-lg btn-block mt-3">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    Adicionar ao carrinho
+                </button>
+            </div>
+        </form>
+
+        </div>
+
+        {% if request.session.carrinho %}
+        
+          <div class='text-center mb-3'>
+          <a class="text-warning text-center" href="{% url 'cardapio:carrinho' %}" style="text-decoration: underline; font-size: 20px;"> Ver Carrinho </a> 
+          </div>
+
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+
+
+{% endblock conteudo %}

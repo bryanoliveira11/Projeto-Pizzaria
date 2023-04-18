@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} Login | {% endblock title %}
+{% block conteudo %}
+
+<div class="row">
+    <div class="col-lg m-5">
+      <h3>Login</h3>
+      <p> Se já Tem Cadastro, Basta Fazer o Login nos Campos Abaixo ! </p>
+
+      <form method="POST" action="{% url 'cliente:login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="InputUsuario"> Usuário </label>
+          <input type="text" name="usuario" class="form-control" id="InputUsuario" aria-describedby="usuariohelp" placeholder="Digite Seu Usuário">
+        </div>
+        <div class="form-group">
+          <label for="InputSenha"> Senha </label>
+          <input type="password" name="senha" class="form-control" id="InputSenha" placeholder="Digite Sua Senha">
+        </div>
+        <button type="submit" class="btn bg-warning btn-block btn-lg mt-3"> Entrar </button>
+        <div class="text-center mt-3">
+          <p> 
+            Ainda Não Tem Conta ?
+            <a class="text-warning ml-2" href="{% url 'cliente:cadastro' %}" style="text-decoration: underline; font-size: 20px;"> Cadastre-se 
+            </a>  
+          </p>
+        </div>
+      </form>
+</div>
+
+{% endblock conteudo %}

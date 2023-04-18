@@ -1,0 +1,54 @@
+{% extends "base.html" %} 
+{% block title %} Carrinho | {% endblock title %}
+{% load static %}
+{% load filters %}
+{% block conteudo %}
+
+<main class="container mt-4 mb-4">
+<div class="row mt-3">
+    <div class="col mt-5">
+
+        {% if request.session.carrinho %}
+
+        <section style="background-color: #eee; height: fit-content; padding: 20px; border-radius:7px;">
+            <div class="container h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                 
+                  {% include 'parciais/_carrinho.html' %}
+          
+                  <div class="d-flex justify-content-end">
+
+                    {% if request.user.is_authenticated %}
+
+                    <a href="{% url 'cardapio:pizzas' %}" class="btn btn-light btn-lg me-2 mr-3" style="cursor:pointer">Continuar Comprando</a>
+                    <a href="{% url 'cardapio:resumodopedido' %}" class="btn bg-warning btn-lg"> Finalizar Compra </a>
+                    
+                    {% else %}
+
+                    <a href="{% url 'cardapio:pizzas' %}" class="btn btn-light btn-lg me-2 mr-2" style="cursor:pointer">Continuar Comprando</a>
+                    <a href="{% url 'cliente:login' %}" class="btn bg-warning btn-lg"> Fazer Login </a>
+                    <a href="{% url 'cliente:cadastro' %}" class="btn bg-warning btn-lg ml-2"> Criar Conta </a>
+                    {% endif %}
+
+                  </div>
+          
+                </div>
+              </div>
+            </div>
+          </section>
+
+{% else %}
+
+    <div class="row mt-5 text-center">
+        <div class="col">
+        <img class="mr-4" src="{% static 'imgs/empty-cart.png'%}" alt="img_erro" style="width: 15rem;"/>
+          <h3 class="font-weight-bold">Carrinho Vazio</h3>
+          <p class="lead font-weight-light">Não Há Produtos no seu Carrinho.</p>
+          <a class="btn bg-warning mt-2" href="{% url 'cardapio:pizzas' %}" style="font-size: 20px;"> Ver Cardápio </a> 
+        </div>
+    </div>
+
+{% endif %}
+
+{% endblock conteudo %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Cadastro | {% endblock title %}  
+{% block conteudo %}
+
+<div class="col-lg m-2">
+
+    {% if request.user.is_authenticated %}
+
+    <h3> Minha Conta </h3>
+    <p> Esta é Sua Conta. Aqui é Possível Realizar a Alteração dos Seus Dados !  </p>
+
+    {% else %}
+
+    <h3> Cadastro </h3>
+    <p> Caso Ainda não Tenha Cadastro, Utilize o Formulário Abaixo !  </p>
+
+    {% endif %}
+
+  <form action="" method="post" class="mt-2">
+    {% csrf_token %} 
+    
+    <div class="mt-4"> 
+      {{ userForm|crispy }} 
+    </div> 
+    
+    <div class="mt-4"> 
+      <p class="text-center font-weight-bold" style="font-size: 20px;">Dados de Endereço</p> 
+      {{ clienteForm|crispy }} 
+    </div>
+
+    <div class="row">
+      <div class="col">
+
+        {% if request.user.is_authenticated %}
+
+          <button type="submit" class="btn btn-warning btn-block btn-lg mt-3">
+            Alterar Dados
+          </button>
+
+          {% else %}
+
+          <button type="submit" class="btn btn-warning btn-block btn-lg mt-3">
+            Cadastrar
+          </button>
+
+          {% endif %}
+
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+
+{% endblock conteudo %}
