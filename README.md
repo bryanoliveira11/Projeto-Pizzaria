@@ -1,6 +1,6 @@
 <h1> Project Pizzeria </h1>
 
-- WebSite That Simulates a Pizzeria Ordering.
+WebSite That Simulates a Pizzeria Ordering.
 
 Project Made Using : 
 
